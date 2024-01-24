@@ -174,14 +174,13 @@ export async function POST(request: NextRequest) {
 
     // Check if the stream is already locked by a reader
     const reader = readableStream.getReader();
-    const isLocked = reader.locked;
     reader.releaseLock(); // Immediately release the lock if we just checked the status
 
     if (isLocked) {
-      console.error('Stream is already locked.');
+      console.error("Stream is already locked.");
       return NextResponse.json(
         {
-          error: 'Stream is already locked.',
+          error: "Stream is already locked.",
         },
         {
           status: 500,
