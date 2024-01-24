@@ -172,6 +172,26 @@ export async function POST(request: NextRequest) {
     const stream = await chatEngine.chat(message, chatHistory, true);
     const readableStream = createReadableStream(stream, chatHistory);
 
+    // Check if the stream is already locked by a reader
+    const reader = readableStream.getReader();
+    const isLocked = reader.locked;
+    reader.releaseLock(); // Immediately release the lock if we just checked the status
+
+    if (isLocked) {
+      console.error('Stream is already locked.');
+      return NextResponse.json(
+        {
+          error: 'Stream is already locked.',
+        },
+        {
+          status: 500,
+        },
+      );
+    }
+
+    // Log the state of the stream
+    console.log(`Stream locked: ${readableStream.locked}`);
+
     return new NextResponse(readableStream, {
       headers: {
         "Content-Type": "text/event-stream",
