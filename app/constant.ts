@@ -1,5 +1,5 @@
 export const GITHUB_URL = "https://github.com/run-llama/chat-llamaindex";
-
+export const STAR_HOME_URL = "https://starmorph.com";
 export enum Path {
   Home = "/",
   Chat = "/",

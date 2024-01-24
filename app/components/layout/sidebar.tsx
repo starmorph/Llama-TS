@@ -2,7 +2,7 @@ import { ThemeToggle } from "@/app/components/layout/theme-toggle";
 import { Github, Settings } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useNavigate } from "react-router-dom";
-import { GITHUB_URL, Path } from "../../constant";
+import { GITHUB_URL, Path, STAR_HOME_URL } from "../../constant";
 import Locale from "../../locales";
 import { Button } from "../ui/button";
 import Typography from "../ui/typography";
@@ -47,10 +47,9 @@ export function SideBar(props: { className?: string }) {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => window.open(GITHUB_URL, "_blank")}
+            onClick={() => window.open(STAR_HOME_URL, "_blank")}
           >
             <Github className="mr-2 h-4 w-4" />
-            <span>{Locale.Home.Github}</span>
           </Button>
         </div>
       </div>
