@@ -84,6 +84,7 @@ function createReadableStream(
   writer.closed.catch(() => {
     // reader aborted the stream
     aborted = true;
+    writer.releaseLock();
   });
   const encoder = new TextEncoder();
   const onNext = async () => {
